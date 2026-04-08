@@ -6,10 +6,12 @@ const validarPost = require("./validacao/post");
 const jwt = require("jsonwebtoken");
 const auth = require("./auth/authLogin");
 const bcrypt = require("bcrypt");
+const cors = require("cors");
 
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("<h1>Rede Social!</h1>");
@@ -71,11 +73,9 @@ app.post("/login", async (req, res) => {
     {expiresIn: '1h'}
   )
 
-  console.log('Login secret:', process.env.JWT_SECRET);
   res.json({token})
 
   } catch (error) {
-    console.log('Erro no login:', error);
     res.status(500).json({
       mensagem: "Erro interno do servidor"
     })
