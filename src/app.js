@@ -7,9 +7,11 @@ const jwt = require("jsonwebtoken");
 const auth = require("./auth/authLogin");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
+const helmet = require("helmet");
 
 
 const app = express();
+app.use(helmet());
 app.use(express.json());
 app.use(cors());
 
